@@ -1,19 +1,23 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, FlatList, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { PostAuthNavigationParamList, PostAuthStackNavigationProps } from '../../navigation/types';
 
 const HomeScreen = () => {
   // Sample data for the FlatList
   const data = [
-    { id: '1', name: 'FITTINGS HDPE' },
-    { id: '2', name: 'FITTINGS PPRC' },
-    { id: '3', name: 'OIL SEALS' },
-    { id: '4', name: 'PIPE HDPE' },
-    { id: '5', name: 'PU SEAL' },
-    { id: '6', name: 'WATER REFRACTOR RING' },
+    { id: '1', name: 'FITTINGS HDPE', nav: 'FittingsHDPE' },
+    { id: '2', name: 'FITTINGS PPRC', nav: 'FittingsHDPE' },
+    { id: '3', name: 'OIL SEALS', nav: 'FittingsHDPE' },
+    { id: '4', name: 'PIPE HDPE', nav: 'FittingsHDPE' },
+    { id: '5', name: 'PU SEAL', nav: 'FittingsHDPE' },
+    { id: '6', name: 'WATER REFRACTOR RING', nav: 'FittingsHDPE' },
   ];
 
-  const renderItem = ({ item }: { item: { id: string; name: string } }) => (
-    <TouchableOpacity style={styles.itemContainer} onPress={() => console.log(`${item.name} clicked`)}>
+  const navigation = useNavigation<PostAuthStackNavigationProps['navigation']>();
+
+  const renderItem = ({ item }: { item: { id: string; name: string, nav: string } }) => (
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigation.navigate(item.nav)}>
       <Text style={styles.itemText}>{item.name}</Text>
     </TouchableOpacity>
   );
